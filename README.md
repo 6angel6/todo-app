@@ -15,11 +15,13 @@ This TODO application is written in Go. It provides a REST API for managing task
 - Docker
 - Gin (web framework)
 - Migrations
+- Swagger (API documentation)
 
-## Installation
+## API Documentation
 
-1. Clone the repository:
+The API documentation is available using Swagger UI. Once the application is running, you can access the API documentation at:
 
-   ```sh
-   git clone https://github.com/6angel6/todo-app.git
+http://localhost:8080/swagger-ui.html
+
+
 
