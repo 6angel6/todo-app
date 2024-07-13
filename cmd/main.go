@@ -10,10 +10,19 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	_ "github.com/swaggo/files"
+	_ "github.com/swaggo/gin-swagger"
 	"os"
 	"os/signal"
 	"syscall"
 )
+
+//	@title			Todo App API
+//	@version		1.0
+//	@description	API server for TodoList Application
+
+//	@host		localhost:8000
+//	@BasePath	/
 
 func main() {
 	logrus.SetFormatter(&logrus.JSONFormatter{})

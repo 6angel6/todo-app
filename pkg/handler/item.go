@@ -7,6 +7,19 @@ import (
 	"strconv"
 )
 
+// @Summary		CreateItem
+// @Tags			items
+// @Description	create a new todo item
+// @ID				create-item
+// @Accept			json
+// @Produce		json
+// @Param			id		path		int				true	"List ID"
+// @Param			input	body		model.TodoItem	true	"Item info"
+// @Success		200		{integer}	integer			1
+// @Failure		400,404	{object}	errorResponse
+// @Failure		500		{object}	errorResponse
+// @Failure		default	{object}	errorResponse
+// @Router			/lists/{id}/items [post]
 func (h *Handler) createItem(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
@@ -37,6 +50,18 @@ func (h *Handler) createItem(c *gin.Context) {
 	})
 }
 
+// @Summary		GetAllItems
+// @Tags			items
+// @Description	get all todo items for a list
+// @ID				get-all-items
+// @Accept			json
+// @Produce		json
+// @Param			id		path		int		true	"List ID"
+// @Success		200		{array}		model.TodoItem
+// @Failure		400,404	{object}	errorResponse
+// @Failure		500		{object}	errorResponse
+// @Failure		default	{object}	errorResponse
+// @Router			/lists/{id}/items [get]
 func (h *Handler) getAllItems(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
@@ -59,6 +84,18 @@ func (h *Handler) getAllItems(c *gin.Context) {
 	c.JSON(http.StatusOK, items)
 }
 
+// @Summary		GetItemById
+// @Tags			items
+// @Description	get a todo item by ID
+// @ID				get-item-by-id
+// @Accept			json
+// @Produce		json
+// @Param			id		path		int		true	"Item ID"
+// @Success		200		{object}	model.TodoItem
+// @Failure		400,404	{object}	errorResponse
+// @Failure		500		{object}	errorResponse
+// @Failure		default	{object}	errorResponse
+// @Router			/items/{id} [get]
 func (h *Handler) getItemById(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
@@ -82,6 +119,19 @@ func (h *Handler) getItemById(c *gin.Context) {
 
 }
 
+// @Summary		UpdateItem
+// @Tags			items
+// @Description	update a todo item
+// @ID				update-item
+// @Accept			json
+// @Produce		json
+// @Param			id		path		int					true	"Item ID"
+// @Param			input	body		model.UpadteItemInput	true	"Updated item info"
+// @Success		200
+// @Failure		400,404	{object}	errorResponse
+// @Failure		500		{object}	errorResponse
+// @Failure		default	{object}	errorResponse
+// @Router			/items/{id} [put]
 func (h *Handler) updateItem(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
@@ -106,6 +156,18 @@ func (h *Handler) updateItem(c *gin.Context) {
 
 }
 
+// @Summary		DeleteItem
+// @Tags			items
+// @Description	delete a todo item
+// @ID				delete-item
+// @Accept			json
+// @Produce		json
+// @Param			id		path		int		true	"Item ID"
+// @Success		200		{object}	statusResponse
+// @Failure		400,404	{object}	errorResponse
+// @Failure		500		{object}	errorResponse
+// @Failure		default	{object}	errorResponse
+// @Router			/items/{id} [delete]
 func (h *Handler) deleteItem(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {

@@ -2,18 +2,24 @@ package model
 
 import "errors"
 
+// TodoList @Summary		TodoList
+// @Description	A todo list
 type TodoList struct {
 	Id          int    `json:"id"`
 	Title       string `json:"Title" binding:"required"`
 	Description string `json:"Description"`
 }
 
+// UserList @Summary		UserList
+// @Description	User to List association
 type UserList struct {
 	Id     int
 	UserId int
 	ListId int
 }
 
+// TodoItem @Summary		TodoItem
+// @Description	A todo item
 type TodoItem struct {
 	Id          int    `json:"id" db:"id"`
 	Title       string `json:"title" db:"title" binding:"required"`
@@ -21,6 +27,8 @@ type TodoItem struct {
 	Done        bool   `json:"done" db:"done"`
 }
 
+// List @Summary		List
+// @Description	A list to item association
 type List struct {
 	Id     int
 	ListId int

@@ -1,8 +1,11 @@
 package handler
 
 import (
+	_ "TODOapp/docs"
 	"TODOapp/pkg/service"
 	"github.com/gin-gonic/gin"
+	"github.com/swaggo/files"
+	"github.com/swaggo/gin-swagger"
 )
 
 type Handler struct {
@@ -13,6 +16,12 @@ func NewHandler(services *service.Service) *Handler {
 	return &Handler{services: services}
 }
 
+//	@title			Todo App API
+//	@version		1.0
+//	@description	API server for TodoList Application
+
+// @host		localhost:8000
+// @BasePath	/
 func (h *Handler) InitRoutes() *gin.Engine {
 	//gin.SetMode(gin.ReleaseMode)
 	var router *gin.Engine = gin.New()
@@ -46,6 +55,12 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			items.PUT("/:id", h.updateItem)
 			items.DELETE("/:id", h.deleteItem)
 		}
+	}
+
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	err := router.Run(":8000")
+	if err != nil {
+		return nil
 	}
 	return router
 

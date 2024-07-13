@@ -1,5 +1,7 @@
 package model
 
+// @Summary		User
+// @Description	User structure
 type User struct {
 	Id       int    `json:"-" db:"id"`
 	Name     string `json:"name" binding:"required"`
