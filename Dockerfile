@@ -1,25 +1,44 @@
+# Dockerfile
+
+# Используем Golang Alpine как базовый образ для сборки
 FROM golang:1.22-alpine AS build
 
+# Устанавливаем зависимости
+RUN apk update && apk add --no-cache postgresql-client
+
+# Устанавливаем рабочую директорию
 WORKDIR /app
 
+# Копируем и скачиваем зависимости Go модулей
 COPY go.mod go.sum ./
-
 RUN go mod download
 
+# Копируем все остальные файлы и собираем приложение
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o todo-app ./cmd/main.go
+# Собираем приложение
+RUN go build -o todo-app ./cmd/main.go
 
-FROM alpine:edge
+# Копируем wait-for-postgres.sh и делаем его исполняемым
+COPY wait-for-postgres.sh ./
+RUN chmod +x wait-for-postgres.sh
+
+# Окончательный образ, используем Alpine
+FROM alpine:latest
 
 WORKDIR /app
 
+# Копируем собранный бинарный файл из предыдущей стадии
 COPY --from=build /app/todo-app .
-COPY ./config /app/config
-COPY .env /app/.env
 
+# Копируем wait-for-postgres.sh из предыдущей стадии
+COPY --from=build /app/wait-for-postgres.sh .
+
+# Устанавливаем необходимые пакеты для Alpine
 RUN apk --no-cache add ca-certificates tzdata
 
+# Открываем порт 8000
 EXPOSE 8000
 
-ENTRYPOINT ["/app/todo-app"]
+# Указываем точку входа для запуска приложения
+CMD ["./todo-app"]
