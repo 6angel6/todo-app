@@ -1,9 +1,9 @@
 package main
 
 import (
-	"TODOapp/pkg/handler"
-	"TODOapp/pkg/repository"
-	"TODOapp/pkg/service"
+	"TODOapp/internal/handler"
+	"TODOapp/internal/repository"
+	"TODOapp/internal/service"
 	todo "TODOapp/server"
 	"context"
 	"github.com/joho/godotenv"

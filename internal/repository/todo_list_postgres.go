@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"TODOapp/model"
+	"TODOapp/internal/model"
 	"fmt"
 	"github.com/jmoiron/sqlx"
 	"strings"

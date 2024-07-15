@@ -2,7 +2,7 @@ package handler
 
 import (
 	_ "TODOapp/docs"
-	"TODOapp/pkg/service"
+	"TODOapp/internal/service"
 	"github.com/gin-gonic/gin"
 	"github.com/swaggo/files"
 	"github.com/swaggo/gin-swagger"

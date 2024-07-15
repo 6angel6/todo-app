@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"TODOapp/model"
+	"TODOapp/internal/model"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
